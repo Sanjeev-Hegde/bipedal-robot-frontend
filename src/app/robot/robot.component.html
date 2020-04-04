@@ -1,0 +1,65 @@
+<h2 class="heading1">Bipedal Robot V1</h2>
+<br>
+<div>
+    <h4 class="heading1 display-item-inline headint2">Devices</h4>
+    <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Add New Device</a>
+  
+    <i  
+        class="fa fa-caret-down fa-2x float-right" 
+        (click)="isDevicesCollapsed = !isDevicesCollapsed"
+        [attr.aria-expanded]="!isDevicesCollapsed" 
+        aria-controls="devices"
+    >
+    </i>
+ 
+</div>
+
+<hr class="custom-hr">
+<div id="devices" [ngbCollapse]="isDevicesCollapsed">
+    <div *ngFor="let pca9685 of pca9685s;" class="col-sm-12 col-md-6 col-lg-4 col-xl-2" >
+        <div class="card card-background" style="margin-top: 10px;" >
+            <img src="assets/pca9685.jpg" class="card-img-top" alt="Pca9685">
+            <div class="card-body" style="cursor: pointer;" [routerLink]="['/pca9685', pca9685.id]">
+              <h5 class="card-title ">{{pca9685.name}}</h5>
+              <p class="card-text ">Address: {{pca9685.address}}</p>
+              <p class="card-text ">Frequency: {{pca9685.address}}</p>
+              <!-- <span class="float-right "><i class="fa fa-trash-o " aria-hidden="true"></i> Delete</span> -->
+              
+            </div>
+            <div class="card-footer">
+                <a href="#" ><i class="fa fa-trash-o " aria-hidden="true"></i> Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<div>
+    <h4 class="heading1 display-item-inline headint2">Movements</h4>
+    <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Add New Movement</a>
+    <i  
+        class="fa fa-caret-down fa-2x float-right" 
+        (click)="isMovementsCollapsed = !isMovementsCollapsed"
+        [attr.aria-expanded]="!isMovementsCollapsed" 
+        aria-controls="devices"
+    >
+    </i>
+</div>
+
+<hr class="custom-hr">
+
+<div id="movements" [ngbCollapse]="isMovementsCollapsed">
+    <div *ngFor="let movement of movements;" class="col-sm-12 col-md-6 col-lg-4 col-xl-2" >
+        <div class="card card-background" style="margin-top: 10px;" >
+            <div class="card-body" style="cursor: pointer;" [routerLink]="['/movement', movement.id]">
+              <h5 class="card-title ">{{movement.name}}</h5>
+              <p class="card-text ">{{movement.description}}</p>
+              <!-- <span class="float-right "><i class="fa fa-trash-o " aria-hidden="true"></i> Delete</span> -->              
+            </div>
+            <div class="card-footer">
+                <a href="#" ><i class="fa fa-play" aria-hidden="true"></i> Run</a>
+                <a href="#" class="float-right"><i class="fa fa-trash-o " aria-hidden="true"></i> Delete</a>
+            </div>
+        </div>
+    </div>
+</div>

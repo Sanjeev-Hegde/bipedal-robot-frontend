@@ -1,0 +1,36 @@
+<h3 *ngIf="!robot">Loading data...</h3>
+<div *ngIf="robot">    
+    <h2  class="heading1">{{robot.name}}</h2>
+  
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 box-padding" >
+                <div class="card-background box-padding">
+                    <h4 class="heading4 display-item-inline">Actuators</h4>
+                    <span  style="cursor: pointer;" *ngIf="!isInitialized" class="float-right" (click)="initializePca9685s()">Initialize</span>
+                    <span  *ngIf="isInitialized" class="float-right" >Initialized</span>
+                    <hr class="custom-hr">
+                    <div *ngFor="let servo of servos; let i = index;">
+                        Name: {{servo.name}}<br>
+                        Channel: {{servo.channel}}
+                        <div class="input-group">
+                            <input type="range" min="0" max="180" [name]="'slider' + i" [(ngModel)]="servo.range" (change)="getRange(servo)" class="form-control" >&nbsp;
+                            <input type="number" min="0" max="180" [(ngModel)]="servo.range" (change)="getRange(servo)" class="form-control-number"/>
+                        </div>
+                       
+                        <hr *ngIf="i<servos.length-1" class="custom-hr">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 box-padding">
+                <div class="card-background box-padding">
+                    <h4 class="heading4 display-item-inline">Actions</h4>
+                    <hr class="custom-hr">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

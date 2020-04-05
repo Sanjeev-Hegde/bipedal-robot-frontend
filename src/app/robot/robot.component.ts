@@ -15,15 +15,16 @@ export class RobotComponent implements OnInit {
   isMovementsCollapsed:boolean = false;
   pca9685s: Pca9685[];
   movements:Movement[];
+  robotId:number;
   constructor(private pca9685Service:Pca9685Service, 
     private route: ActivatedRoute,
     private movementService:MovementService  
   ) { }
 
   ngOnInit(): void {
-    let robotId = parseInt(this.route.snapshot.paramMap.get('id'));
-    this.getPca9685sFromRobotId(robotId);
-    this.getMovementsFromRobotId(robotId);
+    this.robotId = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.getPca9685sFromRobotId(this.robotId);
+    this.getMovementsFromRobotId(this.robotId);
   }
 
   getPca9685sFromRobotId(robotId:number){

@@ -1,7 +1,7 @@
 <h2 class="heading1">Bipedal Robot V1</h2>
 <br>
 <div>
-    <h4 class="heading1 display-item-inline headint2">Devices</h4>
+    <h4 class="heading4 display-item-inline">Devices</h4>
     <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Add New Device</a>
   
     <i  
@@ -35,7 +35,7 @@
 
 <br>
 <div>
-    <h4 class="heading1 display-item-inline headint2">Movements</h4>
+    <h4 class="heading4 display-item-inline">Movements</h4>
     <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Add New Movement</a>
     <i  
         class="fa fa-caret-down fa-2x float-right" 
@@ -51,7 +51,7 @@
 <div id="movements" [ngbCollapse]="isMovementsCollapsed">
     <div *ngFor="let movement of movements;" class="col-sm-12 col-md-6 col-lg-4 col-xl-2" >
         <div class="card card-background" style="margin-top: 10px;" >
-            <div class="card-body" style="cursor: pointer;" [routerLink]="['/movement', movement.id]">
+            <div class="card-body" style="cursor: pointer;" [routerLink]="['/robot',robotId,'movement', movement.id]">
               <h5 class="card-title ">{{movement.name}}</h5>
               <p class="card-text ">{{movement.description}}</p>
               <!-- <span class="float-right "><i class="fa fa-trash-o " aria-hidden="true"></i> Delete</span> -->              

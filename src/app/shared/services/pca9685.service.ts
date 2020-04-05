@@ -15,6 +15,11 @@ export class Pca9685Service {
     return this.http.post<Pca9685>('/api/pca9685s/',pca9685);
   }
 
+  initializePca9685s(pca9685IdListWrapper:{"pca9685IdList":Array<number>}){
+    return this.http.put('/api/pca9685s/initialize',pca9685IdListWrapper);
+  }
+
+
   getPca9685s():Observable<Pca9685[]>{
     return this.http.get<Pca9685[]>('/api/pca9685s');
   }

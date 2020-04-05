@@ -15,3 +15,7 @@ export class Servo  {
       this.pca9685Id = data.pca9685Id;
     }
   }
+
+  export class ServoSlider extends Servo{
+    range?:number
+  }

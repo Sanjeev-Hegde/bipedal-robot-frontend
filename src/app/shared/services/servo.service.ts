@@ -12,7 +12,7 @@ export class ServoService {
 
     constructor(private http: HttpClient) { }
 
-    moveServo(pca9685Id:number,servoId:number,angle:number){
-        return this.http.put('/api/pca9685s/'+pca9685Id+'/servos/'+servoId+'/move/'+angle,null);
+    moveServo(pca9685Id:number,servoId:number,angle:number,speed:number){
+        return this.http.put('/api/pca9685s/'+pca9685Id+'/servos/'+servoId+'/move/'+angle+'/speed/'+speed,null);
     }
 }

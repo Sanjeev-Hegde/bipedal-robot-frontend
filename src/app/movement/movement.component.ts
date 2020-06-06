@@ -43,7 +43,7 @@ export class MovementComponent implements OnInit {
     })
   }
   getRange(servo:ServoSlider){
-   this.servoService.moveServo(servo.pca9685Id,servo.id,servo.range).subscribe();    
+   this.servoService.moveServo(servo.pca9685Id,servo.id,servo.range,8).subscribe();    
   }
   initializePca9685s(){
     this.pca9685Service.initializePca9685s({pca9685IdList:this.pca9685Ids}).subscribe(()=>{

@@ -14,8 +14,8 @@
                         Name: {{servo.name}}<br>
                         Channel: {{servo.channel}}
                         <div class="input-group">
-                            <input type="range" min="0" max="180" [name]="'slider' + i" [(ngModel)]="servo.range" (change)="getRange(servo)" class="form-control" >&nbsp;
-                            <input type="number" min="0" max="180" [(ngModel)]="servo.range" (change)="getRange(servo)" class="form-control-number"/>
+                            <input type="range" min="0" max="180" [name]="'slider' + i" [(ngModel)]="servo.range" (change)="getRange(servo)" class="form-control form-control-sm" >&nbsp;
+                            <input  style="border: none; width:60px" type="number" min="0" max="180" [(ngModel)]="servo.range" (change)="getRange(servo)" class="form-control-number form-control-sm"/>
                         </div>
                        
                         <hr *ngIf="i<servos.length-1" class="custom-hr">
@@ -24,8 +24,55 @@
             </div>
             <div class="col-md-9 box-padding">
                 <div class="card-background box-padding">
-                    <h4 class="heading4 display-item-inline">Actions</h4>
-                    <hr class="custom-hr">
+                    <h4 class="heading4 display-item-inline">Actions</h4>                    
+                    <hr class="custom-hr">                    
+                    <span (click)="addServoPositions()" class="heading4 cursor-pointer" >
+                    <i class="fa fa-plus " aria-hidden="true"></i> Add Next Servo Positions
+                    </span>
+                    &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <input type="number" class="form-control form-control-sm display-item-inline" style="width:75px" > 
+                    <!-- <button  class="btn btn-primary mb-2 form-control-sm">Add Delay</button> -->
+                    <span  class="heading4 cursor-pointer" >
+                      Add Delay
+                    </span>
+                    &nbsp;&nbsp;|&nbsp;&nbsp; 
+                    <input type="number" class="form-control form-control-sm display-item-inline" style="width:50px" > 
+                    <span  class="heading4 cursor-pointer" >
+                     Go To
+                    </span>
+                    <br><br>
+                    <div style="background-color: white;">
+                        <table class="table table-borderless">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col" *ngFor="let servo of servos; let i = index;">
+                                    C {{servo.channel}}
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                <tr  *ngFor="let action of actions; let i = index;">
+                                    <th scope="row">{{i+1}}</th>
+                                    <ng-container *ngIf="action.servoMotions">
+                                        <td  *ngFor="let servoMotion of action.servoMotions">
+                                            {{servoMotion.finalPosition}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container *ngIf="action.delay">
+                                        <td> 
+                                            Delay {{action.delay}}
+                                        </td>
+                                    </ng-container>
+                                    <ng-container *ngIf="action.goTo">
+                                        <td> 
+                                            GoTO {{action.goTo}}
+                                        </td>
+                                    </ng-container>
+                                </tr>                    
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>

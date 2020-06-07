@@ -7,6 +7,10 @@ import { Servo, ServoSlider } from '../shared/models/Servo';
 import { Pca9685 } from '../shared/models/Pca9685';
 import { ServoService } from '../shared/services/servo.service';
 import { Pca9685Service } from '../shared/services/pca9685.service';
+import { Action } from '../shared/models/Action';
+import { ServoMotion } from '../shared/models/ServoMotion';
+import { ActionService } from '../shared/services/action.service';
+import { ServoMotionsService } from '../shared/services/servo-motion.service';
 
 @Component({
   selector: 'app-movement',
@@ -20,9 +24,12 @@ export class MovementComponent implements OnInit {
   servos:ServoSlider[]= new Array();
   pca9685Ids = new Array<number>();
   isInitialized:boolean;
+  actions:Action[] = [];
   constructor(private route: ActivatedRoute,private robotService:RobotService,
     private servoService:ServoService,
-    private pca9685Service: Pca9685Service) { }
+    private pca9685Service: Pca9685Service,
+    private actionService:ActionService,
+    private servoMotionsService: ServoMotionsService) { }
 
   ngOnInit(): void {
     this.robotId= parseInt(this.route.snapshot.paramMap.get('robotId'));
@@ -51,4 +58,21 @@ export class MovementComponent implements OnInit {
     });
   }
 
+  addServoPositions(){
+    let servoMotions:ServoMotion[] = [];
+    let action = new Action({type: "ACTION_SERVOMOTIONS"})
+    this.actionService.addAction(action).subscribe(actionres=>{
+      this.servos.forEach(servo=>{
+        if(servo.range)
+        servoMotions.push({finalPosition:servo.range,servoId:servo.id,speed:8,actionId:actionres.id});
+      });
+        
+      this.servoMotionsService.addActionServoMotions(actionres.id,servoMotions).subscribe(()=>{
+        this.actionService.getActions().subscribe(actions=>{
+          this.actions = actions ; 
+        })
+      })
+    })    
+  }
 }
+

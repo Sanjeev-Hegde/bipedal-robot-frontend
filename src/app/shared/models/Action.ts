@@ -2,7 +2,6 @@ import { ServoMotion } from './ServoMotion';
 
 export class Action {
     id?: number;
-    sequenceId: number;
     type: string;
     delay?: number;
     goTo?: number;
@@ -12,7 +11,6 @@ export class Action {
   
     constructor(data?: Partial<Action>) {
       this.id = data.id;
-      this.sequenceId = data.sequenceId;
       this.type = data.type;
       this.delay = data.delay;
       this.goTo = data.goTo;
